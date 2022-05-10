@@ -9,7 +9,7 @@ export default{
     type:"array",
     of:[{type:"image"}],
     options:{
-      hotspots:true,
+      hotspot:true,
     }
   },
     {
