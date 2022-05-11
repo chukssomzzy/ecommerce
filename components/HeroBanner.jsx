@@ -13,7 +13,7 @@ const HeroBanner = ({heroBanner}) => {
 			 <h1>{largeText1}</h1>
 			 <Image {...imageProps} layout="fill" objectFit="contain" alt="headphones" className="hero-banner-image" />
      <div>
-  <Link href={`product/${product}`} passHref><button type="button">{buttonText}</button></Link>
+  <Link href={`products/${product}`} passHref><button type="button">{buttonText}</button></Link>
 			 <div className="desc">
 			 	<h5>Description</h5>
 			 	<p>{desc}</p>

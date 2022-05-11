@@ -19,7 +19,7 @@ const FooterBanner = ({footerBanner}) => {
         <p>{smallText}</p>
         <p>{midText}</p>
         <p>{desc}</p>
-					<Link href={`/product/${product}`} passHref><button type="button">{buttonText}</button></Link>
+					<Link href={`/products/${product}`} passHref><button type="button">{buttonText}</button></Link>
 					</div>
 <div className="footer-banner-image">
       <Image {...imageProps} width={700} height={700}/>
