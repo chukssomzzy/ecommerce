@@ -13,8 +13,8 @@ export const AppProvider = ({children})=>{
     const addToCart = (product)=>{
       return dispatch({type:"ADD_TO_CART",payload:product})
     }
-  const toggleCart = (state)=>{
-    return dispatch ({type:"TOGGLE_CART",payload:state})
+  const toggleCart = ()=>{
+    return dispatch ({type:"TOGGLE_CART"})
   }
   const removeItem = (removeData)=>{
     return dispatch({type:"REMOVE_ITEM",payload:removeData})

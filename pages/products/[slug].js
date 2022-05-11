@@ -11,7 +11,7 @@ const ProductDetails = ({products,product}) => {
   const {qty,toggleQty,addToCart,toggleCart}= useGlobalContext()
   const handleBuyNow =()=>{
     addToCart({...product,cartQty:qty})
-    toggleCart(true)
+    toggleCart()
   }
   return (
     <div>

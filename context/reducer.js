@@ -57,7 +57,7 @@ export const reducer=(state,action)=>{
     }
     case (action.type==="TOGGLE_CART"):{
       const {showCart}={...state}
-      return {...state,showCart:action.payload||!showCart}
+      return {...state,showCart:!showCart}
     }
     case(action.type==="REMOVE_ITEM"):{
      toast.success(`Removed ${action.payload.name} From Cart`)
