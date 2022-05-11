@@ -13,18 +13,19 @@ export const AppProvider = ({children})=>{
     const addToCart = (product)=>{
       return dispatch({type:"ADD_TO_CART",payload:product})
     }
-  const toggleCart = ()=>{
-    return dispatch ({type:"TOGGLE_CART"})
+  const toggleCart = (state)=>{
+    return dispatch ({type:"TOGGLE_CART",payload:state})
   }
   const removeItem = (removeData)=>{
     return dispatch({type:"REMOVE_ITEM",payload:removeData})
   }
+  const resetCart =()=>dispatch({type:"RESET_CART"})
  useEffect(() => { 
     return dispatch({type:"CALC_SUBTOTAL"})
  }, [state?.cart])
-
+  
   return(
-  <AppContext.Provider value={{...state,toggleQty,addToCart,toggleCart,removeItem}}>
+  <AppContext.Provider value={{...state,toggleQty,addToCart,toggleCart,removeItem,resetCart}}>
    {children}
   </AppContext.Provider>
   )

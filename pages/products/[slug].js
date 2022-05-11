@@ -8,8 +8,11 @@ import { useGlobalContext } from '../../context/stateContext'
 const ProductDetails = ({products,product}) => {
   const {image,name,details,price,_id}= product
   const [index, setIndex] = useState(0)
-  const {qty,toggleQty,addToCart}= useGlobalContext()
-
+  const {qty,toggleQty,addToCart,toggleCart}= useGlobalContext()
+  const handleBuyNow =()=>{
+    addToCart({...product,cartQty:qty})
+    toggleCart(true)
+  }
   return (
     <div>
       <div className="product-detail-container">
@@ -63,7 +66,7 @@ const ProductDetails = ({products,product}) => {
           </div>
           <div className="buttons">
             <button type="button" className="add-to-cart" onClick={()=>addToCart({...product,cartQty:qty})}>Add To Cart</button>
-<button type="button" className="buy-now" onClick="">Buy Now</button>
+<button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button>
           </div>
         </div>
       </div>

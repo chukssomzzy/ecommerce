@@ -57,14 +57,14 @@ export const reducer=(state,action)=>{
     }
     case (action.type==="TOGGLE_CART"):{
       const {showCart}={...state}
-      return {...state,showCart:!showCart}
+      return {...state,showCart:action.payload||!showCart}
     }
     case(action.type==="REMOVE_ITEM"):{
      toast.success(`Removed ${action.payload.name} From Cart`)
       const {cart} = {...state}
       return { ...state, cart: cart.filter(item=>(item._id!== action.payload.id)) }
     }
-    case(action.type === "CALC_SUBTOTAL"):
+    case(action.type === "CALC_SUBTOTAL"):{
       const {cart} ={...state}
       if(!!cart?.length){
       let {totalPrice,totalQuantities} = cart.reduce((prevTotal,currentItem)=>{
@@ -76,6 +76,11 @@ export const reducer=(state,action)=>{
    return {...state,totalPrice,totalQuantities} 
       }
       return{...state,totalPrice:0,totalQuantities:0}
+    }
+    case(action.type==="RESET_CART"):{
+      localStorage.clear()
+      return{...state,showCart:false,cart:[],totalPrice:0,qty:0}
+    }
    default:
       throw new Error(`No Matching Type for ${action.type}`)
   }

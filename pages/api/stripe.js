@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 
-const stripe =  Stripe(process.env.STRIPE_SEC_KEY)
+const stripe = new Stripe(process.env.STRIPE_SEC_KEY)
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
             quantity:item.cartQty,
           }
         }),
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: `${req.headers.origin}/success`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       }
       // Create Checkout Sessions from body params.
