@@ -5,6 +5,7 @@ import {initialState, reducer} from "./reducer";
 const AppContext = React.createContext()
 
 
+
 export const AppProvider = ({children})=>{
   const [state, dispatch] = useReducer(reducer,initialState)
   const toggleQty=(id,type)=>{
@@ -21,8 +22,12 @@ export const AppProvider = ({children})=>{
   }
   const resetCart =()=>dispatch({type:"RESET_CART"})
  useEffect(() => { 
-    return dispatch({type:"CALC_SUBTOTAL"})
+  dispatch({type:"CALC_SUBTOTAL"})
+   localStorage.setItem('state',JSON.stringify(state))
  }, [state?.cart])
+  useEffect(()=>{
+    dispatch({type:"SET_INITIAL_STATE",payload:"state"})
+  },[])
   
   return(
   <AppContext.Provider value={{...state,toggleQty,addToCart,toggleCart,removeItem,resetCart}}>

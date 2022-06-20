@@ -81,6 +81,11 @@ export const reducer=(state,action)=>{
       localStorage.clear()
       return{...state,showCart:false,cart:[],totalPrice:0,qty:0}
     }
+    case(action.type==="SET_INITIAL_STATE"):{
+      const AppState = JSON.parse(localStorage.getItem(action.payload))
+      if(AppState)return{...AppState}
+      return{...state}
+    }
    default:
       throw new Error(`No Matching Type for ${action.type}`)
   }
