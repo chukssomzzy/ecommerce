@@ -2,11 +2,11 @@ import React,{useContext,useReducer,useEffect} from "react";
 import {initialState, reducer} from "./reducer";
 
 
-const storedState = JSON.parse((localStorage.getItem('state')))
 const AppContext = React.createContext()
 
 
-export const AppProvider = ({children})=>{
+export const AppProvider = ({children})=>{  
+  const [storedState, setStoredState] = useState({})
   const [state, dispatch] = useReducer(reducer,storedState ?? initialState)
   const toggleQty=(id,type)=>{
     return dispatch({type:"TOGGLE_QTY",payload:{type,id}})
@@ -21,13 +21,14 @@ export const AppProvider = ({children})=>{
     return dispatch({type:"REMOVE_ITEM",payload:removeData})
   }
   const resetCart =()=>dispatch({type:"RESET_CART"})
+  useEffect(()=>{
+    dispatch({type:"SET_INITIAL_STATE",payload:"state"})
+    setStoredState(JSON.parse(localStorage.getItem('state')))
+  },[])
  useEffect(() => { 
   dispatch({type:"CALC_SUBTOTAL"})
    localStorage.setItem('state',JSON.stringify(state))
  }, [state?.cart])
-  useEffect(()=>{
-    dispatch({type:"SET_INITIAL_STATE",payload:"state"})
-  },[])
   
   return(
   <AppContext.Provider value={{...state,toggleQty,addToCart,toggleCart,removeItem,resetCart}}>
