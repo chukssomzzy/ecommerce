@@ -2,12 +2,12 @@ import React,{useContext,useReducer,useEffect} from "react";
 import {initialState, reducer} from "./reducer";
 
 
+const storedState = JSON.parse((localStorage.getItem('state')))
 const AppContext = React.createContext()
 
 
-
 export const AppProvider = ({children})=>{
-  const [state, dispatch] = useReducer(reducer,initialState)
+  const [state, dispatch] = useReducer(reducer,storedState ?? initialState)
   const toggleQty=(id,type)=>{
     return dispatch({type:"TOGGLE_QTY",payload:{type,id}})
   }
