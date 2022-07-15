@@ -13,7 +13,8 @@ const Cart = () => {
     const {cart,totalPrice,totalQuantities,toggleCart,toggleQty,removeItem} = useGlobalContext()
 	const handleCheckOut = async()=>{
 		const stripe = await getStripe()
-        const { data } = await axios.post(`${BASE_URL}/api/stripe`,cart)
+    console.log(BASE_URL)
+        const { data } = await axios.post(`/api/stripe`,cart)
 		if(data.statusCode===500) return
 		toast.loading("Redirecting...")
 		stripe.redirectToCheckout({sessionId:data.id})
