@@ -10,7 +10,7 @@ export const reducer=(state,action)=>{
         cartItem = cart.find(item=>item._id===action.payload.id);
       }*/
       if(action.payload.type==="INC"){
-        if(!!cart.length){
+        if(!!cart?.length){
           tempCart= cart.map(item=>{
             const {cartQty} = {...item}
             if(item._id===action.payload.id){
@@ -21,7 +21,7 @@ export const reducer=(state,action)=>{
         }
        qty+=1
       }else if(action.payload.type === "DEC"){
-        if(!!cart.length){
+        if(!!cart?.length){
           tempCart=  cart.map(item=>{
             const {cartQty}={...item}
             if(item._id===action.payload.id){
@@ -29,7 +29,7 @@ export const reducer=(state,action)=>{
             }
             return item;
          }).filter(item=>{
-           if(item.cartQty<=0){
+           if(item?.cartQty<=0){
              toast.error(`Removed ${item.name} from cart`)
              return false
            }
@@ -83,9 +83,9 @@ export const reducer=(state,action)=>{
     }
     case(action.type==="SET_INITIAL_STATE"):{
       const AppState = JSON.parse(localStorage.getItem(action.payload))
-      if(AppState)return{...AppState}
+      if(AppState) return{...AppState}
       return{...state}
-    }
+    } 
    default:
       throw new Error(`No Matching Type for ${action.type}`)
   }

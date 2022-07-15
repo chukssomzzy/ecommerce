@@ -5,20 +5,16 @@ import {TiDeleteOutline} from "react-icons/ti"
 import { useGlobalContext } from '../context/stateContext'
 import { urlFor } from '../lib/client'
 import  getStripe  from '../lib/getStripe'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { BASE_URL } from '../lib/utils/utils' 
 const Cart = () => {
 	const cartRef = useRef()
-	const {cart,totalPrice,totalQuantities,toggleCart,toggleQty,removeItem} = useGlobalContext()
+    const {cart,totalPrice,totalQuantities,toggleCart,toggleQty,removeItem} = useGlobalContext()
 	const handleCheckOut = async()=>{
 		const stripe = await getStripe()
-		const resp = await fetch("/api/stripe",{
-			method:"POST",
-			headers:{
-				"Content-Type":"application/json",
-			},
-      body:JSON.stringify(cart)
-		})
-		if(resp.statusCode===500) return
-		const data = await resp.json()
+        const { data } = await axios.post(`${BASE_URL}/api/stripe`,cart)
+		if(data.statusCode===500) return
 		toast.loading("Redirecting...")
 		stripe.redirectToCheckout({sessionId:data.id})
 	}
